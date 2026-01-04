@@ -1,4 +1,12 @@
 services:
+  activemq:
+    image: 'apache/activemq-classic:latest'
+    ports:
+      - '61616'
+  artemis:
+    image: 'apache/activemq-artemis:latest'
+    ports:
+      - '61616'
   elasticsearch:
     image: 'docker.elastic.co/elasticsearch/elasticsearch:7.17.10'
     environment:
@@ -8,6 +16,38 @@ services:
     ports:
       - '9200'
       - '9300'
+  mariadb:
+    image: 'mariadb:latest'
+    environment:
+      - 'MARIADB_DATABASE=mydatabase'
+      - 'MARIADB_PASSWORD=secret'
+      - 'MARIADB_ROOT_PASSWORD=verysecret'
+      - 'MARIADB_USER=myuser'
+    ports:
+      - '3306'
+  mongodb:
+    image: 'mongo:latest'
+    environment:
+      - 'MONGO_INITDB_DATABASE=mydatabase'
+      - 'MONGO_INITDB_ROOT_PASSWORD=secret'
+      - 'MONGO_INITDB_ROOT_USERNAME=root'
+    ports:
+      - '27017'
+  mysql:
+    image: 'mysql:latest'
+    environment:
+      - 'MYSQL_DATABASE=mydatabase'
+      - 'MYSQL_PASSWORD=secret'
+      - 'MYSQL_ROOT_PASSWORD=verysecret'
+      - 'MYSQL_USER=myuser'
+    ports:
+      - '3306'
+  oracle:
+    image: 'gvenzl/oracle-free:latest'
+    environment:
+      - 'ORACLE_PASSWORD=secret'
+    ports:
+      - '1521'
   postgres:
     image: 'postgres:latest'
     environment:
@@ -16,6 +56,12 @@ services:
       - 'POSTGRES_USER=myuser'
     ports:
       - '5432'
+  pulsar:
+    image: 'apachepulsar/pulsar:latest'
+    ports:
+      - '6650'
+      - '8080'
+    command: 'bin/pulsar standalone'
   rabbitmq:
     image: 'rabbitmq:latest'
     environment:
@@ -23,3 +69,15 @@ services:
       - 'RABBITMQ_DEFAULT_USER=myuser'
     ports:
       - '5672'
+  redis:
+    image: 'redis:latest'
+    ports:
+      - '6379'
+  sqlserver:
+    image: 'mcr.microsoft.com/mssql/server:latest'
+    environment:
+      - 'ACCEPT_EULA=yes'
+      - 'MSSQL_PID=express'
+      - 'MSSQL_SA_PASSWORD=verYs3cret'
+    ports:
+      - '1433'
